@@ -43,12 +43,12 @@ class _EditAccountStylesState extends State<EditAccountStyles> {
         actions: [TextButton(onPressed: () {
           Navigator.of(context).pop();
           setState(() {
-            if(styles.length == 1){
+            /*if(styles.length == 1){
               styles[0] = [];
               print("We currently have ${styles[0]}");
-            }else{
+            }else{*/
               styles.removeAt(index);
-            }
+            //}
           });
         }, child: const Text("Delete")),
           TextButton(onPressed: (){
@@ -58,7 +58,7 @@ class _EditAccountStylesState extends State<EditAccountStyles> {
     ));
 
     Widget availableStyles(){
-      if(styles[0].isEmpty){
+      if(styles.isEmpty){
         return const Text("{ No available Styles added yet. Press Add style to add one }");
       }else{
         return ListView.builder(scrollDirection: Axis.vertical, shrinkWrap: true,itemCount: styles.length ,itemBuilder: (BuildContext context, int index){
@@ -106,8 +106,10 @@ class _EditAccountStylesState extends State<EditAccountStyles> {
                 List<String>? addedData = await Navigator.push(context, MaterialPageRoute(builder: (context) => const AddAccountStyle()));
                 if(addedData != null){
                   setState(() {
-                    if(styles[0].isEmpty){
-                      styles[0] = addedData;
+                    print("The data is ${styles}");
+                    if(styles.isEmpty){
+                      //styles[0] = addedData;
+                      styles.add(addedData);
                     }else{
                       styles.add(addedData);
                     }
